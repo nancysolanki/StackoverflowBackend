@@ -1,6 +1,7 @@
 package com.stackoverflow.backend.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,22 +16,23 @@ public class StackoverflowService {
     StackoverflowRepository stackoverflowRepository;
 
     // to Create and post Question
-    public StackoverflowModel create( StackoverflowModel stm){
+    public StackoverflowModel create(StackoverflowModel stm) {
         return stackoverflowRepository.save(stm);
     }
 
-    //read question
-    public List<StackoverflowModel> findQuestion()
-    {
+    // read question
+    public List<StackoverflowModel> findQuestion() {
         return stackoverflowRepository.findAll();
     }
-    //Delete Question
-    public void deleteQuestion(int id){
+
+    // Delete Question
+    public void deleteQuestion(int id) {
         stackoverflowRepository.deleteById(id);
     }
 
-    //update Question
-    public StackoverflowModel updateQuestion(int id, StackoverflowModel stm){
-        StackoverflowModel model= stackoverflowRepository.findById(id).get();
+    // get all questions PostedBy
+    public List<String> getQuestionsByPostedBy(String postedBy) {
+        List<StackoverflowModel> models = stackoverflowRepository.findByPostedBy(postedBy);
+        return models.stream().map(StackoverflowModel::getQuestion).collect(Collectors.toList());
     }
 }

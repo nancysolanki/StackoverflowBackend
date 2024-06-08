@@ -11,7 +11,9 @@ public class StackoverflowModel {
     @Field("_id")
     private int id;
     // id is the primary key
+    @Field("PostedBy")
     private String postedBy;
+    @Field("Question")
     private String question;
 
     public StackoverflowModel(){};
