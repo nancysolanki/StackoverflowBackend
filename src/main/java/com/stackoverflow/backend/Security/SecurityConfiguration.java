@@ -10,7 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfiguration {
-
+   
+    //Spring Security Authentication
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
@@ -21,6 +22,7 @@ public class SecurityConfiguration {
         return new InMemoryUserDetailsManager(user);
     }
 
+    //Spring Security Authorization
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
